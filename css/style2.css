@@ -1,0 +1,170 @@
+/* General Styling */
+:root {
+    --primary-bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --header-bg: #004a7c;
+    --header-text: #ffffff;
+    --accent-color: #007bff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.navbar {
+    background-color: #ffffff; /* Warna latar bar */
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Memberi efek bayangan halus */
+    margin-bottom: 2rem; /* Jarak ke konten di bawahnya */
+}
+
+/* Daftar tautan di dalam bar */
+.nav-links {
+    display: flex; /* Membuat item berjajar horizontal */
+    justify-content: flex-start; /* Memulai item dari kiri */
+    list-style: none; /* Menghilangkan bulatan/bullet points */
+    margin: 0;
+    padding: 0;
+}
+
+/* Setiap item tautan */
+.nav-links a {
+    display: block; /* Membuat seluruh area bisa diklik */
+    color: #555555; /* Warna teks tautan */
+    text-decoration: none; /* Menghilangkan garis bawah */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 16px 24px; /* Jarak di dalam tombol (vertikal dan horizontal) */
+    transition: all 0.3s ease; /* Efek transisi yang mulus */
+    border-bottom: 3px solid transparent; /* Garis bawah transparan sebagai dasar */
+}
+
+/* Efek saat kursor mouse menyentuh tautan */
+.nav-links a:hover {
+    color: #007bff; /* Warna teks berubah saat disentuh */
+    background-color: #f8f9fa; /* Warna latar sedikit berubah */
+}
+
+/* Gaya khusus untuk tautan yang sedang aktif */
+.nav-links a.active {
+    color: #007bff; /* Warna teks untuk tautan aktif */
+    border-bottom: 3px solid #007bff; /* Garis bawah sebagai penanda aktif */
+}
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-left: 5px solid var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Animation initial state */
+    /* opacity: 0;
+    transform: translateY(20px); */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    margin: 0 0 0.75rem 0;
+    color: var(--header-bg);
+    font-weight: 600;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: var(--text-light);
+    flex-grow: 1; /* Pushes the reference to the bottom */
+    margin-bottom: 1rem;
+}
+
+.card-reference {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    background-color: #e6f2ff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    align-self: flex-start; /* Only takes up necessary width */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+    header p {
+        font-size: 1rem;
+    }
+    .card {
+        padding: 1.5rem;
+    }
+}
