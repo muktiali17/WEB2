@@ -1,4 +1,4 @@
-/* ==== General Styling & Google Fonts ==== */
+/* ==== Gaya Dasar & Font ==== */
 :root {
     --primary-color: #007bff;
     --light-gray: #f8f9fa;
@@ -45,7 +45,7 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ==== Main Container ==== */
+/* ==== Kontainer Utama ==== */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
@@ -55,7 +55,7 @@ body {
     border-radius: 8px;
 }
 
-/* ==== Form General Styling ==== */
+/* ==== Gaya Formulir Umum ==== */
 form {
     width: 100%;
 }
@@ -92,11 +92,11 @@ select {
     padding: 0.8rem;
     border: 1px solid var(--gray-border);
     border-radius: 4px;
-    box-sizing: border-box; /* Important for consistent sizing */
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-/* ==== Table Styling (Desktop First) ==== */
+/* ==== Gaya Tabel (Tampilan Desktop) ==== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -115,14 +115,13 @@ thead th {
     font-weight: 600;
 }
 
-/* Specific table in section D */
 #perlengkapan-instalasi th {
     background-color: transparent;
     font-weight: 500;
     width: 40%;
 }
 
-/* ==== Result Section ==== */
+/* ==== Bagian Hasil ==== */
 #hasil-pemeriksaan {
     margin-top: 3rem;
     padding: 1.5rem;
@@ -148,7 +147,7 @@ thead th {
     margin-top: 0.5rem;
 }
 
-/* ==== Download Button ==== */
+/* ==== Tombol Unduh ==== */
 .download-button {
     display: block;
     width: 100%;
@@ -170,8 +169,9 @@ thead th {
     background-color: #218838;
 }
 
-/* ==== RESPONSIVE STYLES (for mobile) ==== */
-/* Target screens smaller than 768px */
+/* ======================================= */
+/* ==== GAYA RESPONSIVE (UNTUK MOBILE) ==== */
+/* ======================================= */
 @media screen and (max-width: 768px) {
     .container {
         margin: 1rem 0;
@@ -183,9 +183,10 @@ thead th {
         font-size: 1.4rem;
     }
 
-    /* Make the wide tables stack vertically */
+    /* Membuat tabel lebar menjadi vertikal */
     table thead {
-        display: none; /* Hide table headers, we will add them as labels */
+        /* Sembunyikan header asli tabel di mobile */
+        display: none;
     }
 
     table, tbody, tr, td {
@@ -201,9 +202,9 @@ thead th {
     }
     
     td {
-        text-align: right; /* Align input to the right */
+        text-align: right;
         position: relative;
-        padding-left: 50%; /* Make space for the label */
+        padding-left: 50%; /* Beri ruang untuk label */
         border: none;
         border-bottom: 1px solid var(--gray-border);
     }
@@ -212,8 +213,9 @@ thead th {
         border-bottom: none;
     }
 
+    /* Tampilkan label dari atribut data-label */
     td::before {
-        content: attr(data-label); /* Use the data-label as a pseudo-header */
+        content: attr(data-label);
         position: absolute;
         left: 0;
         width: 45%;
@@ -222,7 +224,7 @@ thead th {
         text-align: left;
     }
     
-    /* Reset for section D tables, just stack them */
+    /* Atur ulang gaya untuk tabel di bagian D */
     #perlengkapan-instalasi th,
     #perlengkapan-instalasi td {
         display: block;
@@ -233,7 +235,7 @@ thead th {
     }
     
     #perlengkapan-instalasi td::before {
-        display: none; /* Remove pseudo-header for this specific table */
+        display: none;
     }
 
     #perlengkapan-instalasi tr {
