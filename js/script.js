@@ -1,132 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formulirContainer = document.getElementById('formulir-container');
-    const tambahGedungBtn = document.getElementById('tambah-gedung-btn');
-    let gedungCounter = 1;
+document.addEventListener("DOMContentLoaded", function () {
+    const visualCheckItems = document.querySelectorAll(".visual-check-item");
+    const hasilPersentaseEl = document.getElementById("hasil-persentase");
+    const hasilRekomendasiEl = document.getElementById("hasil-rekomendasi");
 
-    /**
-     * Fungsi utama untuk menghitung skor dan memperbarui tampilan hasil
-     * untuk satu blok formulir gedung tertentu.
-     * @param {HTMLElement} formGedung - Elemen div '.formulir-gedung' yang akan dihitung.
-     */
-    const perbaruiHasil = (formGedung) => {
-        const items = formGedung.querySelectorAll('.visual-check-item');
-        const hasilPersentaseEl = formGedung.querySelector('.hasil-persentase');
-        const hasilRekomendasiEl = formGedung.querySelector('.hasil-rekomendasi');
+    function calculateVisualScore() {
+        let totalScore = 0;
+        const maxScore = visualCheckItems.length * 2;
 
-        if (!items.length || !hasilPersentaseEl || !hasilRekomendasiEl) {
-            return;
-        }
-
-        let totalSkor = 0;
-        const skorMaksimal = items.length * 2; // Nilai 'Baik' adalah 2
-
-        items.forEach(select => {
-            totalSkor += parseInt(select.value, 10);
+        visualCheckItems.forEach((item) => {
+            totalScore += parseInt(item.value, 10);
         });
 
-        const persentase = skorMaksimal > 0 ? (totalSkor / skorMaksimal) * 100 : 0;
+        const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
 
-        hasilPersentaseEl.textContent = persentase.toFixed(1) + '%';
-        hasilRekomendasiEl.className = 'hasil-rekomendasi'; // Reset class sebelum menambahkan yang baru
+        if (hasilPersentaseEl && hasilRekomendasiEl) {
+            hasilPersentaseEl.textContent = percentage.toFixed(1) + "%";
+            hasilRekomendasiEl.classList.remove(
+                "rekomendasi-baik",
+                "rekomendasi-cukup",
+                "rekomendasi-kurang"
+            );
 
-        if (persentase >= 85) {
-            hasilRekomendasiEl.textContent = 'Layak';
-            hasilRekomendasiEl.classList.add('rekomendasi-baik');
-        } else if (persentase >= 60) {
-            hasilRekomendasiEl.textContent = 'Perlu Perbaikan';
-            hasilRekomendasiEl.classList.add('rekomendasi-cukup');
-        } else {
-            hasilRekomendasiEl.textContent = 'Tidak Layak';
-            hasilRekomendasiEl.classList.add('rekomendasi-kurang');
-        }
-    };
-
-    /**
-     * Fungsi untuk memasang event listener pada sebuah formulir.
-     * @param {HTMLElement} formGedung - Elemen div '.formulir-gedung' yang akan diaktifkan.
-     */
-    const aktifkanFormulir = (formGedung) => {
-        formGedung.addEventListener('change', (event) => {
-            if (event.target.classList.contains('visual-check-item')) {
-                perbaruiHasil(formGedung);
+            if (percentage >= 85) {
+                hasilRekomendasiEl.textContent = "Layak";
+                hasilRekomendasiEl.classList.add("rekomendasi-baik");
+            } else if (percentage >= 60) {
+                hasilRekomendasiEl.textContent = "Perlu Perbaikan";
+                hasilRekomendasiEl.classList.add("rekomendasi-cukup");
+            } else {
+                hasilRekomendasiEl.textContent = "Tidak Layak";
+                hasilRekomendasiEl.classList.add("rekomendasi-kurang");
             }
-        });
-        perbaruiHasil(formGedung);
-    };
-
-    /**
-     * Fungsi untuk menduplikasi formulir saat tombol diklik.
-     */
-    tambahGedungBtn.addEventListener('click', () => {
-        gedungCounter++;
-        const template = document.querySelector('.formulir-gedung');
-        const formBaru = template.cloneNode(true);
-
-        formBaru.querySelectorAll('input, select').forEach(el => {
-            if (el.type === 'text' || el.type === 'number') el.value = '';
-            else if (el.tagName === 'SELECT') el.selectedIndex = 0;
-            if (el.id) el.id = el.id.replace(/-\d*$/, "") + `-${gedungCounter}`;
-        });
-
-        formBaru.querySelectorAll('label').forEach(label => {
-            if (label.htmlFor) label.htmlFor = label.htmlFor.replace(/-\d*$/, "") + `-${gedungCounter}`;
-        });
-        
-        formBaru.querySelector('.nama-gedung').placeholder = `Contoh: Gedung ${String.fromCharCode(64 + gedungCounter)}`;
-        
-        formulirContainer.appendChild(formBaru);
-        aktifkanFormulir(formBaru);
-    });
-
-    // Aktifkan formulir pertama saat halaman dimuat
-    const formAwal = document.querySelector('.formulir-gedung');
-    if (formAwal) {
-        aktifkanFormulir(formAwal);
+        }
     }
+
+    // Menjalankan fungsi saat ada perubahan dan saat halaman dimuat
+    visualCheckItems.forEach((item) => {
+        item.addEventListener("change", calculateVisualScore);
+    });
+    calculateVisualScore();
 });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const visualCheckItems = document.querySelectorAll(".visual-check-item");
-//     const hasilPersentaseEl = document.getElementById("hasil-persentase");
-//     const hasilRekomendasiEl = document.getElementById("hasil-rekomendasi");
-
-//     function calculateVisualScore() {
-//         let totalScore = 0;
-//         const maxScore = visualCheckItems.length * 2;
-
-//         visualCheckItems.forEach((item) => {
-//             totalScore += parseInt(item.value, 10);
-//         });
-
-//         const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
-
-//         if (hasilPersentaseEl && hasilRekomendasiEl) {
-//             hasilPersentaseEl.textContent = percentage.toFixed(1) + "%";
-//             hasilRekomendasiEl.classList.remove(
-//                 "rekomendasi-baik",
-//                 "rekomendasi-cukup",
-//                 "rekomendasi-kurang"
-//             );
-
-//             if (percentage >= 85) {
-//                 hasilRekomendasiEl.textContent = "Layak";
-//                 hasilRekomendasiEl.classList.add("rekomendasi-baik");
-//             } else if (percentage >= 60) {
-//                 hasilRekomendasiEl.textContent = "Perlu Perbaikan";
-//                 hasilRekomendasiEl.classList.add("rekomendasi-cukup");
-//             } else {
-//                 hasilRekomendasiEl.textContent = "Tidak Layak";
-//                 hasilRekomendasiEl.classList.add("rekomendasi-kurang");
-//             }
-//         }
-//     }
-
-//     // Menjalankan fungsi saat ada perubahan dan saat halaman dimuat
-//     visualCheckItems.forEach((item) => {
-//         item.addEventListener("change", calculateVisualScore);
-//     });
-//     calculateVisualScore();
-// });
 
 // import { jsPDF } from 'jspdf';
 // import 'jspdf-autotable';
