@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Kelayakan Instalasi Listrik</title>
+    {{-- Arahkan ke file CSS di folder public --}}
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-       @media print{
+       @media print {
             .navbar,
             .download-button {
-            display: none !important;
+                display: none !important;
             }
-        } 
+        }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
         <ul class="nav-links">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./form.html">Formulir</a></li>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./form.html" class="active">Formulir</a></li>
         </ul>
     </nav>
 
@@ -85,23 +87,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>Izin/Surat Penunjukan/SLO</td><td><input type="text"></td></tr>
-                        <tr><td>2</td><td>Peta Lokasi</td><td><input type="text"></td></tr>
-                        <tr><td>3</td><td>Diagram Garis Tunggal (SLD)</td><td><input type="text"></td></tr>
-                        <tr><td>4</td><td>Layout Instalasi</td><td><input type="text"></td></tr>
-                        <tr><td>5</td><td>Diagram Pengawatan</td><td><input type="text"></td></tr>
-                        <tr><td>6</td><td>Gambar Area Klasifikasi</td><td><input type="text"></td></tr>
-                        <tr><td>7</td><td>Daftar Komponen Panel</td><td><input type="text"></td></tr>
-                        <tr><td>8</td><td>Perhitungan Arus Hubung Singkat</td><td><input type="text"></td></tr>
-                        <tr><td>9</td><td>Buku Manual</td><td><input type="text"></td></tr>
-                        <tr><td>10</td><td>Buku Pemeliharaan & Operasi</td><td><input type="text"></td></tr>
-                        <tr><td>11</td><td>Tanda Peringatan</td><td><input type="text"></td></tr>
-                        <tr><td>12</td><td>Sertifikat Pabrik Pembuat</td><td><input type="text"></td></tr>
-                        <tr><td>13</td><td>Spesifikasi Teknis Peralatan</td><td><input type="text"></td></tr>
-                        <tr><td>14</td><td>Sertifikasi Peralatan</td><td><input type="text"></td></tr>
-                        <tr><td>15</td><td>Perhitungan Rekapitulasi Daya</td><td><input type="text"></td></tr>
-                        <tr><td>16</td><td>Record Daily (Catatan Harian)</td><td><input type="text"></td></tr>
-                        <tr><td>17</td><td>Data Penunjang Lainnya</td><td><input type="text"></td></tr>
+                        <tr><td data-label="No">1</td><td data-label="Obyek">Izin/Surat Penunjukan/SLO</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">2</td><td data-label="Obyek">Peta Lokasi</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">3</td><td data-label="Obyek">Diagram Garis Tunggal (SLD)</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">4</td><td data-label="Obyek">Layout Instalasi</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">5</td><td data-label="Obyek">Diagram Pengawatan</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">6</td><td data-label="Obyek">Gambar Area Klasifikasi</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">7</td><td data-label="Obyek">Daftar Komponen Panel</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">8</td><td data-label="Obyek">Perhitungan Arus Hubung Singkat</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">9</td><td data-label="Obyek">Buku Manual</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">10</td><td data-label="Obyek">Buku Pemeliharaan & Operasi</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">11</td><td data-label="Obyek">Tanda Peringatan</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">12</td><td data-label="Obyek">Sertifikat Pabrik Pembuat</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">13</td><td data-label="Obyek">Spesifikasi Teknis Peralatan</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">14</td><td data-label="Obyek">Sertifikasi Peralatan</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">15</td><td data-label="Obyek">Perhitungan Rekapitulasi Daya</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">16</td><td data-label="Obyek">Record Daily (Catatan Harian)</td><td data-label="Hasil"><input type="text"></td></tr>
+                        <tr><td data-label="No">17</td><td data-label="Obyek">Data Penunjang Lainnya</td><td data-label="Hasil"><input type="text"></td></tr>
                     </tbody>
                 </table>
             </section>
@@ -117,219 +119,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lampu indikator pada panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Alat ukur (Ampere meter, Volt meter, dsb.)</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Label nama dan nama perusahaan instalatir</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Tanda bahaya pada pintu panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Cover pelindung tegangan sentuh langsung</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Gambar single line diagram dan kartu perawatan</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Kabel bonding untuk pengaman sentuh tidak langsung</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Labeling kabel dan perangkat</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Kode warna kabel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Kebersihan dan Kerapian panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Kondisi Busbar/penghantar</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Kondisi Pengaman (CB, MCCB, Fuse)</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>Kondisi Sepatu kabel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>Sistem pembumian</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>Jarak aman area kerja panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>Akses buka pintu panel tidak terhalang</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>Pencahayaan ruang panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>Area panel bebas dari barang tidak terpakai</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>Ventilasi ruang panel</td>
-                            <td>
-                                <select class="visual-check-item">
-                                    <option value="0">Kurang</option>
-                                    <option value="1">Cukup</option>
-                                    <option value="2">Baik</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <tr><td data-label="No">1</td><td data-label="Obyek">Lampu indikator pada panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">2</td><td data-label="Obyek">Alat ukur (Ampere meter, Volt meter, dsb.)</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">3</td><td data-label="Obyek">Label nama dan nama perusahaan instalatir</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">4</td><td data-label="Obyek">Tanda bahaya pada pintu panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">5</td><td data-label="Obyek">Cover pelindung tegangan sentuh langsung</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">6</td><td data-label="Obyek">Gambar single line diagram dan kartu perawatan</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">7</td><td data-label="Obyek">Kabel bonding untuk pengaman sentuh tidak langsung</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">8</td><td data-label="Obyek">Labeling kabel dan perangkat</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">9</td><td data-label="Obyek">Kode warna kabel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">10</td><td data-label="Obyek">Kebersihan dan Kerapian panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">11</td><td data-label="Obyek">Kondisi Busbar/penghantar</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">12</td><td data-label="Obyek">Kondisi Pengaman (CB, MCCB, Fuse)</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">13</td><td data-label="Obyek">Kondisi Sepatu kabel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">14</td><td data-label="Obyek">Sistem pembumian</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">15</td><td data-label="Obyek">Jarak aman area kerja panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">16</td><td data-label="Obyek">Akses buka pintu panel tidak terhalang</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">17</td><td data-label="Obyek">Pencahayaan ruang panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">18</td><td data-label="Obyek">Area panel bebas dari barang tidak terpakai</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
+                        <tr><td data-label="No">19</td><td data-label="Obyek">Ventilasi ruang panel</td><td data-label="Hasil"><select class="visual-check-item"><option value="0">Kurang</option><option value="1">Cukup</option><option value="2">Baik</option></select></td></tr>
                     </tbody>
                 </table>
             </section>
-            
+
             <section>
                 <h2 class="section-title">C. Pengujian</h2>
                 <table>
@@ -341,22 +153,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>1</td><td>Tegangan Phasa R S T</td><td><input type="text"></td></tr>
-                        <tr><td>2</td><td>Arus Phasa Netral dan PE</td><td><input type="text"></td></tr>
-                        <tr><td>3</td><td>Sistem Pembumian</td><td><input type="text"></td></tr>
-                        <tr><td>4</td><td>Susut Tegangan (Drop Voltage)</td><td><input type="text"></td></tr>
-                        <tr><td>5</td><td>Panas penghantar/terminasi</td><td><input type="text"></td></tr>
-                        <tr><td>6</td><td>Grounding / Pentanahan</td><td><input type="text"></td></tr>
-                        <tr><td>7</td><td>KHA</td><td><input type="text"></td></tr>
-                        <tr><td>8</td><td>Rating Proteksi</td><td><input type="text"></td></tr>
-                        <tr><td>9</td><td>Tahanan Isolasi</td><td><input type="text"></td></tr>
+                        <tr><td data-label="No">1</td><td data-label="Obyek">Tegangan Phasa R S T</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">2</td><td data-label="Obyek">Arus Phasa Netral dan PE</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">3</td><td data-label="Obyek">Sistem Pembumian</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">4</td><td data-label="Obyek">Susut Tegangan (Drop Voltage)</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">5</td><td data-label="Obyek">Panas penghantar/terminasi</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">6</td><td data-label="Obyek">Grounding / Pentanahan</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">7</td><td data-label="Obyek">KHA</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">8</td><td data-label="Obyek">Rating Proteksi</td><td data-label="Keterangan"><input type="text"></td></tr>
+                        <tr><td data-label="No">9</td><td data-label="Obyek">Tahanan Isolasi</td><td data-label="Keterangan"><input type="text"></td></tr>
                     </tbody>
                 </table>
             </section>
-            
-            <section>
+
+            <!-- {{-- Tambahkan ID di sini untuk penargetan CSS --}} -->
+            <section id="perlengkapan-instalasi">
                 <h2 class="section-title">D. Perlengkapan Instalasi Listrik</h2>
-                
+
                 <h3>1. Perlengkapan Instalasi</h3>
                 <table>
                     <tbody>
@@ -368,7 +181,7 @@
                         <tr><th scope="row"><label for="pil-grouping">Pengelompokan (Grouping) Lampu</label></th><td><input id="pil-grouping" type="text"></td></tr>
                     </tbody>
                 </table>
-                
+
                 <h3>2. Kondisi Ruangan</h3>
                 <table>
                     <tbody>
@@ -380,7 +193,7 @@
                         <tr><th scope="row"><label for="kr-panel-luar">Penempatan Panel Lampu di Luar Ruangan</label></th><td><input id="kr-panel-luar" type="text"></td></tr>
                     </tbody>
                 </table>
-                
+
                 <h3>3. Kondisi Instalasi</h3>
                 <table>
                     <tbody>
@@ -393,7 +206,7 @@
                     </tbody>
                 </table>
             </section>
-            
+
             <section id="hasil-pemeriksaan">
                 <h2>Hasil Pemeriksaan Visual</h2>
                 <div id="hasil-persentase">0.0%</div>
@@ -405,8 +218,9 @@
             </button>
         </form>
     </main>
-    
+
+    {{-- Pastikan path ke script.js sudah benar --}}
     <script src="./js/script.js"></script>
-        
+
 </body>
 </html>
