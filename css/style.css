@@ -14,6 +14,32 @@ body {
     color: var(--dark-text);
     line-height: 1.6;
 }
+.navbar{
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.nav-links{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.nav-links a {
+    color: var(--white-text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
 /* ==== Kontainer Utama ==== */
 .container {
@@ -83,6 +109,60 @@ th, td {
 thead th {
     background-color: #e9ecef;
     font-weight: 600;
+}
+
+#perlengkapan-instalasi th {
+    background-color: transparent;
+    font-weight: 500;
+    width: 40%;
+}
+
+/* ==== Result Section ==== */
+#hasil-pemeriksaan {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px dashed var(--primary-color);
+    background-color: #f0f7ff;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#hasil-pemeriksaan h2 {
+    margin-top: 0;
+}
+
+#hasil-persentase {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+#hasil-rekomendasi {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* ==== Download Button ==== */
+.download-button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto 1rem auto;
+    padding: 1rem;
+    background-color: #28a745;
+    color: var(--white-text);
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.download-button:hover {
+    background-color: #218838;
 }
 
 /* ======================================= */
