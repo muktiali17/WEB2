@@ -15,36 +15,6 @@ body {
     line-height: 1.6;
 }
 
-/* ==== Navbar ==== */
-.navbar {
-    background-color: var(--primary-color);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.nav-links a {
-    color: var(--white-text);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.nav-links a.active,
-.nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* ==== Kontainer Utama ==== */
 .container {
     max-width: 1200px;
@@ -92,7 +62,7 @@ select {
     padding: 0.8rem;
     border: 1px solid var(--gray-border);
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Sangat penting untuk konsistensi ukuran */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -115,127 +85,90 @@ thead th {
     font-weight: 600;
 }
 
-#perlengkapan-instalasi th {
-    background-color: transparent;
-    font-weight: 500;
-    width: 40%;
-}
-
-/* ==== Bagian Hasil ==== */
-#hasil-pemeriksaan {
-    margin-top: 3rem;
-    padding: 1.5rem;
-    border: 1px dashed var(--primary-color);
-    background-color: #f0f7ff;
-    text-align: center;
-    border-radius: 8px;
-}
-
-#hasil-pemeriksaan h2 {
-    margin-top: 0;
-}
-
-#hasil-persentase {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-#hasil-rekomendasi {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-}
-
-/* ==== Tombol Unduh ==== */
-.download-button {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto 1rem auto;
-    padding: 1rem;
-    background-color: #28a745;
-    color: var(--white-text);
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.download-button:hover {
-    background-color: #218838;
-}
-
 /* ======================================= */
 /* ==== GAYA RESPONSIVE (UNTUK MOBILE) ==== */
 /* ======================================= */
 @media screen and (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
     .container {
-        margin: 1rem 0;
+        margin: 0;
         padding: 1rem;
         border-radius: 0;
+        box-shadow: none;
     }
 
     h1 {
         font-size: 1.4rem;
     }
 
-    /* Membuat tabel lebar menjadi vertikal */
+    /* Sembunyikan header tabel asli */
     table thead {
-        /* Sembunyikan header asli tabel di mobile */
         display: none;
     }
 
+    /* Ubah perilaku elemen tabel */
     table, tbody, tr, td {
         display: block;
         width: 100%;
+        box-sizing: border-box;
     }
 
+    /* Setiap baris akan menjadi seperti sebuah kartu */
     tr {
+        border: 1px solid #ddd;
+        border-radius: 5px;
         margin-bottom: 1rem;
-        border: 1px solid var(--gray-border);
-        border-radius: 4px;
-        overflow: hidden;
-    }
-    
-    td {
-        text-align: right;
-        position: relative;
-        padding-left: 50%; /* Beri ruang untuk label */
-        border: none;
-        border-bottom: 1px solid var(--gray-border);
-    }
-    
-    tr td:last-child {
-        border-bottom: none;
+        padding: 0;
     }
 
-    /* Tampilkan label dari atribut data-label */
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 45%;
-        padding-left: 1rem;
-        font-weight: 600;
-        text-align: left;
+    /* Atur sel di dalam kartu */
+    td {
+        padding: 0.8rem;
+        padding-left: 45%; /* Sediakan ruang untuk label di kiri */
+        position: relative; /* Diperlukan untuk label */
+        text-align: right; /* Sejajarkan konten (input/teks) ke kanan */
+
+        /* PENTING: Paksa teks panjang untuk turun baris */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
-    
-    /* Atur ulang gaya untuk tabel di bagian D */
+
+    /* Beri garis pemisah antar sel di dalam satu kartu */
+    td:not(:last-child) {
+        border-bottom: 1px solid #eee;
+    }
+
+    /* Buat label dari atribut 'data-label' */
+    td::before {
+        content: attr(data-label); /* Ambil teks dari atribut */
+        position: absolute;
+        left: 0.8rem; /* Posisikan di kiri */
+        width: 40%;
+        text-align: left; /* Sejajarkan teks label ke kiri */
+        font-weight: 600;
+
+        /* Posisikan label di tengah secara vertikal */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Pastikan input dan select pas di dalam ruangnya */
+    td input,
+    td select {
+        width: 100%;
+        text-align: left; /* Teks di dalam input mulai dari kiri */
+    }
+
+    /* Khusus untuk tabel di bagian D agar tetap rapi */
     #perlengkapan-instalasi th,
     #perlengkapan-instalasi td {
         display: block;
         width: 100%;
-        box-sizing: border-box;
-        padding-left: 1rem;
         text-align: left;
-    }
-    
-    #perlengkapan-instalasi td::before {
-        display: none;
+        padding: 0.8rem;
     }
 
     #perlengkapan-instalasi tr {
@@ -245,15 +178,12 @@ thead th {
 
     #perlengkapan-instalasi th {
         background-color: #f7f7f7;
-        padding-top: 0.8rem;
-        padding-bottom: 0.4rem;
-        border: 1px solid var(--gray-border);
-        border-bottom: none;
+    }
+    #perlengkapan-instalasi td {
+        border-bottom: 1px solid #ddd;
     }
 
-    #perlengkapan-instalasi td {
-        border: 1px solid var(--gray-border);
-        border-top: none;
-        margin-bottom: 1rem;
+    #perlengkapan-instalasi td::before {
+        display: none; /* Hilangkan label duplikat untuk tabel ini */
     }
 }
