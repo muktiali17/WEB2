@@ -1,121 +1,102 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const formulirContainer = document.getElementById("formulir-container");
-    const tambahGedungBtn = document.getElementById("tambah-gedung-btn");
-    let nomorGedung = 1;
+document.addEventListener('DOMContentLoaded', () => {
+    const formulirContainer = document.getElementById('formulir-container');
+    const tambahGedungBtn = document.getElementById('tambah-gedung-btn');
+    let gedungCounter = 1;
 
-    // Fungsi untuk menginisialisasi setiap formulir gedung secara terpisah
-    function inisialisasiFormulir(konteksFormulir) {
-        const visualCheckItems = konteksFormulir.querySelectorAll(".visual-check-item");
-        const hasilPersentaseEl = konteksFormulir.querySelector(".hasil-persentase");
-        const hasilRekomendasiEl = konteksFormulir.querySelector(".hasil-rekomendasi");
+    /**
+     * Fungsi utama untuk menghitung skor dan memperbarui tampilan hasil
+     * untuk satu blok formulir gedung tertentu.
+     * @param {HTMLElement} formGedung - Elemen div '.formulir-gedung' yang akan dihitung.
+     */
+    const perbaruiHasil = (formGedung) => {
+        const items = formGedung.querySelectorAll('.visual-check-item');
+        const hasilPersentaseEl = formGedung.querySelector('.hasil-persentase');
+        const hasilRekomendasiEl = formGedung.querySelector('.hasil-rekomendasi');
 
-        // Fungsi perhitungan berdasarkan logika yang Anda berikan
-        function calculateVisualScore() {
-            if (!visualCheckItems.length || !hasilPersentaseEl || !hasilRekomendasiEl) return;
-
-            let totalScore = 0;
-            const maxScore = visualCheckItems.length * 2; // Nilai 'Baik' adalah 2
-
-            visualCheckItems.forEach((item) => {
-                totalScore += parseInt(item.value, 10);
-            });
-
-            const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
-
-            hasilPersentaseEl.textContent = percentage.toFixed(1) + "%";
-
-            // Mengganti class untuk styling (lebih baik dari inline style)
-            hasilRekomendasiEl.classList.remove("rekomendasi-baik", "rekomendasi-cukup", "rekomendasi-kurang");
-
-            if (percentage >= 85) {
-                hasilRekomendasiEl.textContent = "Layak";
-                hasilRekomendasiEl.classList.add("rekomendasi-baik");
-            } else if (percentage >= 60) {
-                hasilRekomendasiEl.textContent = "Perlu Perbaikan";
-                hasilRekomendasiEl.classList.add("rekomendasi-cukup");
-            } else {
-                hasilRekomendasiEl.textContent = "Tidak Layak";
-                hasilRekomendasiEl.classList.add("rekomendasi-kurang");
-            }
+        // Pastikan semua elemen yang dibutuhkan ada
+        if (!items.length || !hasilPersentaseEl || !hasilRekomendasiEl) {
+            return;
         }
 
-        // Jalankan fungsi saat ada perubahan pada dropdown
-        visualCheckItems.forEach((item) => {
-            item.addEventListener("change", calculateVisualScore);
+        let totalSkor = 0;
+        const skorMaksimal = items.length * 2; // Nilai 'Baik' adalah 2
+
+        items.forEach(select => {
+            totalSkor += parseInt(select.value, 10);
         });
 
-        // Panggil sekali saat inisialisasi untuk menampilkan nilai awal
-        calculateVisualScore();
-    }
+        const persentase = skorMaksimal > 0 ? (totalSkor / skorMaksimal) * 100 : 0;
 
-    // Inisialisasi formulir pertama yang sudah ada di HTML
-    inisialisasiFormulir(document.querySelector(".formulir-gedung"));
+        hasilPersentaseEl.textContent = persentase.toFixed(1) + '%';
+        hasilRekomendasiEl.className = 'hasil-rekomendasi'; // Reset class sebelum menambahkan yang baru
 
-    // Fungsi untuk tombol "Tambah Gedung Lain"
-    tambahGedungBtn.addEventListener("click", function () {
-        nomorGedung++;
-        const template = document.querySelector(".formulir-gedung");
-        const klon = template.cloneNode(true);
+        if (persentase >= 85) {
+            hasilRekomendasiEl.textContent = 'Layak';
+            hasilRekomendasiEl.classList.add('rekomendasi-baik');
+        } else if (persentase >= 60) {
+            hasilRekomendasiEl.textContent = 'Perlu Perbaikan';
+            hasilRekomendasiEl.classList.add('rekomendasi-cukup');
+        } else {
+            hasilRekomendasiEl.textContent = 'Tidak Layak';
+            hasilRekomendasiEl.classList.add('rekomendasi-kurang');
+        }
+    };
 
-        // Reset semua nilai input dan select di formulir yang baru
-        klon.querySelectorAll("input, select").forEach((el) => {
-            // Reset nilai
+    /**
+     * Fungsi untuk memasang event listener pada sebuah formulir.
+     * @param {HTMLElement} formGedung - Elemen div '.formulir-gedung' yang akan diaktifkan.
+     */
+    const aktifkanFormulir = (formGedung) => {
+        // Gunakan 'event delegation': satu listener pada parent untuk semua anakan
+        formGedung.addEventListener('change', (event) => {
+            // Hanya bereaksi jika elemen yang berubah memiliki kelas 'visual-check-item'
+            if (event.target.classList.contains('visual-check-item')) {
+                perbaruiHasil(formGedung);
+            }
+        });
+        // Hitung nilai awal saat formulir pertama kali dimuat atau dibuat
+        perbaruiHasil(formGedung);
+    };
+
+    /**
+     * Fungsi untuk menduplikasi formulir saat tombol diklik.
+     */
+    tambahGedungBtn.addEventListener('click', () => {
+        gedungCounter++;
+        const template = document.querySelector('.formulir-gedung');
+        const formBaru = template.cloneNode(true);
+
+        // Reset nilai dan perbarui ID agar unik
+        formBaru.querySelectorAll('input, select').forEach(el => {
             if (el.type === 'text' || el.type === 'number') {
                 el.value = '';
             } else if (el.tagName === 'SELECT') {
                 el.selectedIndex = 0;
             }
-
-            // Update ID dan 'for' agar unik
             if (el.id) {
-                const oldId = el.id.replace(/-\d+$/, "");
-                el.id = `${oldId}-${nomorGedung}`;
+                el.id = el.id.replace(/-\d*$/, "") + `-${gedungCounter}`;
             }
         });
 
-        klon.querySelectorAll("label").forEach((label) => {
+        formBaru.querySelectorAll('label').forEach(label => {
             if (label.htmlFor) {
-                const oldFor = label.htmlFor.replace(/-\d+$/, "");
-                label.htmlFor = `${oldFor}-${nomorGedung}`;
+                label.htmlFor = label.htmlFor.replace(/-\d*$/, "") + `-${gedungCounter}`;
             }
         });
         
-        // Update label dan placeholder untuk Nama Gedung
-        const labelGedung = klon.querySelector('label[for^="nama-gedung"]');
-        const inputGedung = klon.querySelector('input[id^="nama-gedung"]');
-        if (labelGedung) labelGedung.textContent = `1. Nama Gedung`; // Label tetap sama, nomor urut tidak diubah
-        if (inputGedung) inputGedung.placeholder = `Contoh: Gedung ${String.fromCharCode(64 + nomorGedung)}`;
-
-        formulirContainer.appendChild(klon);
-        inisialisasiFormulir(klon); // Aktifkan fungsionalitas untuk formulir baru
+        formBaru.querySelector('.nama-gedung').placeholder = `Contoh: Gedung ${String.fromCharCode(64 + gedungCounter)}`;
+        
+        formulirContainer.appendChild(formBaru);
+        aktifkanFormulir(formBaru); // Aktifkan fungsionalitas untuk formulir baru
     });
+
+    // --- INISIALISASI ---
+    // Aktifkan formulir pertama yang sudah ada saat halaman pertama kali dimuat
+    const formAwal = document.querySelector('.formulir-gedung');
+    if (formAwal) {
+        aktifkanFormulir(formAwal);
+    }
 });
-
-// Fungsi untuk Generate PDF (dibuat di scope global agar bisa dipanggil dari HTML)
-function generatePdf() {
-    const element = document.getElementById("form-kelayakan");
-    const opt = {
-        margin: 0.5,
-        filename: "formulir_kelayakan_instalasi.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-    };
-
-    // Trik agar nilai input dan select yang diubah user ikut tercetak di PDF
-    document.querySelectorAll("input[type='text'], input[type='number']").forEach(input => {
-        input.setAttribute("value", input.value);
-    });
-    document.querySelectorAll("select").forEach(select => {
-        const selectedOption = select.options[select.selectedIndex];
-        if (selectedOption) {
-            Array.from(select.options).forEach(opt => opt.removeAttribute("selected"));
-            selectedOption.setAttribute("selected", "selected");
-        }
-    });
-
-    html2pdf().set(opt).from(element).save();
-}
 
 // document.addEventListener("DOMContentLoaded", function () {
 //     const visualCheckItems = document.querySelectorAll(".visual-check-item");
