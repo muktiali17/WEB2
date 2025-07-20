@@ -54,45 +54,43 @@ header p {
     gap: 1.5rem;
 }
 
+/* Navbar */
 .navbar {
-    background-color: #ffffff; /* Warna latar bar */
+    background-color: #ffffff;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Memberi efek bayangan halus */
-    margin-bottom: 2rem; /* Jarak ke konten di bawahnya */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
 }
 
-/* Daftar tautan di dalam bar */
 .nav-links {
-    display: flex; /* Membuat item berjajar horizontal */
-    justify-content: flex-start; /* Memulai item dari kiri */
-    list-style: none; /* Menghilangkan bulatan/bullet points */
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Setiap item tautan */
 .nav-links a {
-    display: block; /* Membuat seluruh area bisa diklik */
-    color: #555555; /* Warna teks tautan */
-    text-decoration: none; /* Menghilangkan garis bawah */
+    display: block;
+    color: #555555;
+    text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
-    padding: 16px 24px; /* Jarak di dalam tombol (vertikal dan horizontal) */
-    transition: all 0.3s ease; /* Efek transisi yang mulus */
-    border-bottom: 3px solid transparent; /* Garis bawah transparan sebagai dasar */
+    padding: 16px 24px;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
 }
 
-/* Efek saat kursor mouse menyentuh tautan */
 .nav-links a:hover {
-    color: #007bff; /* Warna teks berubah saat disentuh */
-    background-color: #f8f9fa; /* Warna latar sedikit berubah */
+    color: #007bff;
+    background-color: #f8f9fa;
 }
 
-/* Gaya khusus untuk tautan yang sedang aktif */
 .nav-links a.active {
-    color: #007bff; /* Warna teks untuk tautan aktif */
-    border-bottom: 3px solid #007bff; /* Garis bawah sebagai penanda aktif */
+    color: #007bff;
+    border-bottom: 3px solid #007bff;
 }
+
 /* Card Styling */
 .card {
     background-color: var(--card-bg);
@@ -102,11 +100,6 @@ header p {
     border-left: 5px solid var(--accent-color);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    /* Animation initial state */
-    /* opacity: 0;
-    transform: translateY(20px); */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -131,7 +124,7 @@ header p {
 .card-description {
     font-size: 1rem;
     color: var(--text-light);
-    flex-grow: 1; /* Pushes the reference to the bottom */
+    flex-grow: 1;
     margin-bottom: 1rem;
 }
 
@@ -142,7 +135,7 @@ header p {
     background-color: #e6f2ff;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
-    align-self: flex-start; /* Only takes up necessary width */
+    align-self: flex-start;
 }
 
 /* Footer */
@@ -153,18 +146,40 @@ footer {
     color: var(--text-light);
 }
 
-/* Responsive adjustments */
+/* === Responsive adjustments === */
 @media (max-width: 768px) {
     body {
         padding: 1rem;
     }
+    
     header h1 {
         font-size: 1.8rem;
     }
+    
     header p {
         font-size: 1rem;
     }
+    
     .card {
         padding: 1.5rem;
     }
+    
+    /* --- PENAMBAHAN UNTUK FLEKSIBILITAS TEKS --- */
+    .card-icon {
+        font-size: 2.5rem; /* Perkecil ikon */
+    }
+
+    .card-title {
+        font-size: 1.2rem; /* Perkecil judul kartu */
+    }
+
+    .card-description {
+        font-size: 0.95rem; /* Perkecil teks deskripsi */
+    }
+
+    .nav-links {
+        flex-wrap: wrap; /* Izinkan item navbar untuk turun baris jika tidak muat */
+        justify-content: center; /* Posisikan di tengah agar rapi saat turun baris */
+    }
+    /* --- AKHIR PENAMBAHAN --- */
 }
