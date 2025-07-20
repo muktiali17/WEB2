@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasilPersentaseEl = formGedung.querySelector('.hasil-persentase');
         const hasilRekomendasiEl = formGedung.querySelector('.hasil-rekomendasi');
 
-        // Pastikan semua elemen yang dibutuhkan ada
         if (!items.length || !hasilPersentaseEl || !hasilRekomendasiEl) {
             return;
         }
@@ -47,14 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {HTMLElement} formGedung - Elemen div '.formulir-gedung' yang akan diaktifkan.
      */
     const aktifkanFormulir = (formGedung) => {
-        // Gunakan 'event delegation': satu listener pada parent untuk semua anakan
         formGedung.addEventListener('change', (event) => {
-            // Hanya bereaksi jika elemen yang berubah memiliki kelas 'visual-check-item'
             if (event.target.classList.contains('visual-check-item')) {
                 perbaruiHasil(formGedung);
             }
         });
-        // Hitung nilai awal saat formulir pertama kali dimuat atau dibuat
         perbaruiHasil(formGedung);
     };
 
@@ -66,32 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const template = document.querySelector('.formulir-gedung');
         const formBaru = template.cloneNode(true);
 
-        // Reset nilai dan perbarui ID agar unik
         formBaru.querySelectorAll('input, select').forEach(el => {
-            if (el.type === 'text' || el.type === 'number') {
-                el.value = '';
-            } else if (el.tagName === 'SELECT') {
-                el.selectedIndex = 0;
-            }
-            if (el.id) {
-                el.id = el.id.replace(/-\d*$/, "") + `-${gedungCounter}`;
-            }
+            if (el.type === 'text' || el.type === 'number') el.value = '';
+            else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+            if (el.id) el.id = el.id.replace(/-\d*$/, "") + `-${gedungCounter}`;
         });
 
         formBaru.querySelectorAll('label').forEach(label => {
-            if (label.htmlFor) {
-                label.htmlFor = label.htmlFor.replace(/-\d*$/, "") + `-${gedungCounter}`;
-            }
+            if (label.htmlFor) label.htmlFor = label.htmlFor.replace(/-\d*$/, "") + `-${gedungCounter}`;
         });
         
         formBaru.querySelector('.nama-gedung').placeholder = `Contoh: Gedung ${String.fromCharCode(64 + gedungCounter)}`;
         
         formulirContainer.appendChild(formBaru);
-        aktifkanFormulir(formBaru); // Aktifkan fungsionalitas untuk formulir baru
+        aktifkanFormulir(formBaru);
     });
 
-    // --- INISIALISASI ---
-    // Aktifkan formulir pertama yang sudah ada saat halaman pertama kali dimuat
+    // Aktifkan formulir pertama saat halaman dimuat
     const formAwal = document.querySelector('.formulir-gedung');
     if (formAwal) {
         aktifkanFormulir(formAwal);
