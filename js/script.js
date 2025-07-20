@@ -1,25 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const visualCheckItems = document.querySelectorAll(".visual-check-item");
-    const hasilPersentaseEl = document.getElementById("hasil-persentase");
-    const hasilRekomendasiEl = document.getElementById("hasil-rekomendasi");
+    const formulirContainer = document.getElementById("formulir-container");
+    const tambahGedungBtn = document.getElementById("tambah-gedung-btn");
+    let nomorGedung = 1;
 
-    function calculateVisualScore() {
-        let totalScore = 0;
-        const maxScore = visualCheckItems.length * 2;
+    // Fungsi untuk menginisialisasi setiap formulir gedung secara terpisah
+    function inisialisasiFormulir(konteksFormulir) {
+        const visualCheckItems = konteksFormulir.querySelectorAll(".visual-check-item");
+        const hasilPersentaseEl = konteksFormulir.querySelector(".hasil-persentase");
+        const hasilRekomendasiEl = konteksFormulir.querySelector(".hasil-rekomendasi");
 
-        visualCheckItems.forEach((item) => {
-            totalScore += parseInt(item.value, 10);
-        });
+        // Fungsi perhitungan berdasarkan logika yang Anda berikan
+        function calculateVisualScore() {
+            if (!visualCheckItems.length || !hasilPersentaseEl || !hasilRekomendasiEl) return;
 
-        const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
+            let totalScore = 0;
+            const maxScore = visualCheckItems.length * 2; // Nilai 'Baik' adalah 2
 
-        if (hasilPersentaseEl && hasilRekomendasiEl) {
+            visualCheckItems.forEach((item) => {
+                totalScore += parseInt(item.value, 10);
+            });
+
+            const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
+
             hasilPersentaseEl.textContent = percentage.toFixed(1) + "%";
-            hasilRekomendasiEl.classList.remove(
-                "rekomendasi-baik",
-                "rekomendasi-cukup",
-                "rekomendasi-kurang"
-            );
+
+            // Mengganti class untuk styling (lebih baik dari inline style)
+            hasilRekomendasiEl.classList.remove("rekomendasi-baik", "rekomendasi-cukup", "rekomendasi-kurang");
 
             if (percentage >= 85) {
                 hasilRekomendasiEl.textContent = "Layak";
@@ -32,14 +38,127 @@ document.addEventListener("DOMContentLoaded", function () {
                 hasilRekomendasiEl.classList.add("rekomendasi-kurang");
             }
         }
+
+        // Jalankan fungsi saat ada perubahan pada dropdown
+        visualCheckItems.forEach((item) => {
+            item.addEventListener("change", calculateVisualScore);
+        });
+
+        // Panggil sekali saat inisialisasi untuk menampilkan nilai awal
+        calculateVisualScore();
     }
 
-    // Menjalankan fungsi saat ada perubahan dan saat halaman dimuat
-    visualCheckItems.forEach((item) => {
-        item.addEventListener("change", calculateVisualScore);
+    // Inisialisasi formulir pertama yang sudah ada di HTML
+    inisialisasiFormulir(document.querySelector(".formulir-gedung"));
+
+    // Fungsi untuk tombol "Tambah Gedung Lain"
+    tambahGedungBtn.addEventListener("click", function () {
+        nomorGedung++;
+        const template = document.querySelector(".formulir-gedung");
+        const klon = template.cloneNode(true);
+
+        // Reset semua nilai input dan select di formulir yang baru
+        klon.querySelectorAll("input, select").forEach((el) => {
+            // Reset nilai
+            if (el.type === 'text' || el.type === 'number') {
+                el.value = '';
+            } else if (el.tagName === 'SELECT') {
+                el.selectedIndex = 0;
+            }
+
+            // Update ID dan 'for' agar unik
+            if (el.id) {
+                const oldId = el.id.replace(/-\d+$/, "");
+                el.id = `${oldId}-${nomorGedung}`;
+            }
+        });
+
+        klon.querySelectorAll("label").forEach((label) => {
+            if (label.htmlFor) {
+                const oldFor = label.htmlFor.replace(/-\d+$/, "");
+                label.htmlFor = `${oldFor}-${nomorGedung}`;
+            }
+        });
+        
+        // Update label dan placeholder untuk Nama Gedung
+        const labelGedung = klon.querySelector('label[for^="nama-gedung"]');
+        const inputGedung = klon.querySelector('input[id^="nama-gedung"]');
+        if (labelGedung) labelGedung.textContent = `1. Nama Gedung`; // Label tetap sama, nomor urut tidak diubah
+        if (inputGedung) inputGedung.placeholder = `Contoh: Gedung ${String.fromCharCode(64 + nomorGedung)}`;
+
+        formulirContainer.appendChild(klon);
+        inisialisasiFormulir(klon); // Aktifkan fungsionalitas untuk formulir baru
     });
-    calculateVisualScore();
 });
+
+// Fungsi untuk Generate PDF (dibuat di scope global agar bisa dipanggil dari HTML)
+function generatePdf() {
+    const element = document.getElementById("form-kelayakan");
+    const opt = {
+        margin: 0.5,
+        filename: "formulir_kelayakan_instalasi.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    };
+
+    // Trik agar nilai input dan select yang diubah user ikut tercetak di PDF
+    document.querySelectorAll("input[type='text'], input[type='number']").forEach(input => {
+        input.setAttribute("value", input.value);
+    });
+    document.querySelectorAll("select").forEach(select => {
+        const selectedOption = select.options[select.selectedIndex];
+        if (selectedOption) {
+            Array.from(select.options).forEach(opt => opt.removeAttribute("selected"));
+            selectedOption.setAttribute("selected", "selected");
+        }
+    });
+
+    html2pdf().set(opt).from(element).save();
+}
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const visualCheckItems = document.querySelectorAll(".visual-check-item");
+//     const hasilPersentaseEl = document.getElementById("hasil-persentase");
+//     const hasilRekomendasiEl = document.getElementById("hasil-rekomendasi");
+
+//     function calculateVisualScore() {
+//         let totalScore = 0;
+//         const maxScore = visualCheckItems.length * 2;
+
+//         visualCheckItems.forEach((item) => {
+//             totalScore += parseInt(item.value, 10);
+//         });
+
+//         const percentage = maxScore > 0 ? (totalScore / maxScore) * 100 : 0;
+
+//         if (hasilPersentaseEl && hasilRekomendasiEl) {
+//             hasilPersentaseEl.textContent = percentage.toFixed(1) + "%";
+//             hasilRekomendasiEl.classList.remove(
+//                 "rekomendasi-baik",
+//                 "rekomendasi-cukup",
+//                 "rekomendasi-kurang"
+//             );
+
+//             if (percentage >= 85) {
+//                 hasilRekomendasiEl.textContent = "Layak";
+//                 hasilRekomendasiEl.classList.add("rekomendasi-baik");
+//             } else if (percentage >= 60) {
+//                 hasilRekomendasiEl.textContent = "Perlu Perbaikan";
+//                 hasilRekomendasiEl.classList.add("rekomendasi-cukup");
+//             } else {
+//                 hasilRekomendasiEl.textContent = "Tidak Layak";
+//                 hasilRekomendasiEl.classList.add("rekomendasi-kurang");
+//             }
+//         }
+//     }
+
+//     // Menjalankan fungsi saat ada perubahan dan saat halaman dimuat
+//     visualCheckItems.forEach((item) => {
+//         item.addEventListener("change", calculateVisualScore);
+//     });
+//     calculateVisualScore();
+// });
 
 // import { jsPDF } from 'jspdf';
 // import 'jspdf-autotable';

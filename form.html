@@ -11,9 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
        @media print {
-            .navbar,
+            .navbar, .tambah-gedung-btn,
             .download-button {
                 display: none !important;
+            }
+            .formulir-gedung{
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
             }
         }
     </style>
@@ -30,50 +34,55 @@
     <main class="container">
         <form id="form-to-pdf" onsubmit="return false;">
             <h1>FORMULIR INSTRUMEN KELAYAKAN INSTALASI LISTRIK</h1>
-
-            <section>
-                <h2 class="section-title">Data Umum</h2>
-                <div class="form-group">
-                    <label for="pemilik">1. Pemilik / Pemakai</label>
-                    <input type="text" id="pemilik" required>
-                </div>
-                <div class="form-group">
-                    <label for="alamat">2. Alamat Instalasi</label>
-                    <input type="text" id="alamat" required>
-                </div>
-                <div class="form-group">
-                    <label for="jaringan">3. Sistem Jaringan</label>
-                    <input type="text" id="jaringan" placeholder="Contoh: 3 Fasa">
-                </div>
-                <div class="form-group">
-                    <label for="tegangan">4. Tegangan</label>
-                    <input type="number" id="tegangan" placeholder="... V">
-                </div>
-                <div class="form-group">
-                    <label for="frekuensi">5. Frekuensi</label>
-                    <input type="number" id="frekuensi" placeholder="... Hz">
-                </div>
-                <div class="form-group">
-                    <label for="arus">6. Jenis Arus</label>
-                    <input type="text" id="arus" placeholder="Contoh: AC">
-                </div>
-                <div class="form-group">
-                    <label for="sumber">7. Sumber Daya Listrik</label>
-                    <input type="text" id="sumber" placeholder="Contoh: PLN / Genset">
-                </div>
-                <div class="form-group">
-                    <label for="daya">8. Daya Terpasang</label>
-                    <input type="text" id="daya" placeholder="Contoh: 10600 VA">
-                </div>
-                <div class="form-group">
-                    <label for="gambar">9. Gambar Instalasi (SLD/Layout)</label>
-                    <select id="gambar">
-                        <option value="" disabled selected>Pilih Opsi</option>
-                        <option value="Ada">Ada</option>
-                        <option value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </section>
+            <div id="formulir-container">
+                <div class="formulir-gedung">
+                    <section>
+                        <h2 class="section-title">Data Umum</h2>
+                        <div class="form-group">
+                            <label for="nama-gedung-1">1. Nama Gedung</label>
+                            <input type="text" id="nama-gedung-1" class="nama-gedung" placeholder="Contoh: Gedung A" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pemilik-1">2. Pemilik / Pemakai</label>
+                            <input type="text" id="pemilik-1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat-1">3. Alamat Instalasi</label>
+                            <input type="text" id="alamat-1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jaringan-1">4. Sistem Jaringan</label>
+                            <input type="text" id="jaringan-1" placeholder="Contoh: 3 Fasa">
+                        </div>
+                        <div class="form-group">
+                            <label for="tegangan-1">5. Tegangan</label>
+                            <input type="number" id="tegangan-1" placeholder="... V">
+                        </div>
+                        <div class="form-group">
+                            <label for="frekuensi-1">6. Frekuensi</label>
+                            <input type="number" id="frekuensi-1" placeholder="... Hz">
+                        </div>
+                        <div class="form-group">
+                            <label for="arus-1">7. Jenis Arus</label>
+                            <input type="text" id="arus-1" placeholder="Contoh: AC">
+                        </div>
+                        <div class="form-group">
+                            <label for="sumber-1">8. Sumber Daya Listrik</label>
+                            <input type="text" id="sumber-1" placeholder="Contoh: PLN / Genset">
+                        </div>
+                        <div class="form-group">
+                            <label for="daya-1">9. Daya Terpasang</label>
+                            <input type="text" id="daya-1" placeholder="Contoh: 10600 VA">
+                        </div>
+                        <div class="form-group">
+                            <label for="gambar-1">10. Gambar Instalasi (SLD/Layout)</label>
+                            <select id="gambar-1">
+                                <option value="" disabled selected>Pilih Opsi</option>
+                                <option value="Ada">Ada</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                    </section>
 
             <section>
                 <h2 class="section-title">A. Pemeriksaan Dokumen</h2>
@@ -211,8 +220,9 @@
                 <div id="hasil-persentase">0.0%</div>
                 <div id="hasil-rekomendasi">Tidak Layak</div>
             </section>
+            <button type="button" id="tambah-gedung-btn" class="tambah-gedung-btn">Tambah Gedung Lain</button>
 
-            <button id="download-button" class="download-button" onclick="window.print()">
+            <button id="download-button" class="download-button" onclick="generatePdf()">
                 Unduh sebagai PDF
             </button>
         </form>
