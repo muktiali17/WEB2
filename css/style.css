@@ -265,6 +265,6 @@ thead th {
     }
 
     #perlengkapan-instalasi td::before {
-        display: none; /* Hilangkan label duplikat untuk tabel ini */
+        display: none; 
     }
 }

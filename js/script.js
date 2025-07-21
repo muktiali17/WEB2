@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const visualCheckItems = document.querySelectorAll(".visual-check-item");
+    const visualCheckItems = document.querySelectorAll(".check-item");
     const hasilPersentaseEl = document.getElementById("hasil-persentase");
     const hasilRekomendasiEl = document.getElementById("hasil-rekomendasi");
 
