@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function calculateVisualScore() {
         let totalScore = 0;
-        const maxScore = visualCheckItems.length * 2;
+        const maxScore = visualCheckItems.length * 1;
 
         visualCheckItems.forEach((item) => {
             totalScore += parseInt(item.value, 10);
@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "rekomendasi-kurang"
             );
 
-            if (percentage >= 85) {
+            if (percentage >= 80) {
                 hasilRekomendasiEl.textContent = "Layak";
                 hasilRekomendasiEl.classList.add("rekomendasi-baik");
-            } else if (percentage >= 60) {
+            } else if (percentage >= 50) {
                 hasilRekomendasiEl.textContent = "Perlu Perbaikan";
                 hasilRekomendasiEl.classList.add("rekomendasi-cukup");
             } else {

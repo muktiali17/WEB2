@@ -268,3 +268,79 @@ thead th {
         display: none; 
     }
 }
+
+@media print {
+    /* Sembunyikan tombol cetak saat print */
+    #download-button,
+    .download-button {
+        display: none !important;
+    }
+
+    /* Atur ukuran dan margin halaman */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        background: white !important;
+        color: #000 !important;
+        font-size: 12pt;
+        -webkit-print-color-adjust: exact; /* Pastikan warna background tercetak */
+        print-color-adjust: exact;
+    }
+
+    /* Hapus bayangan dan padding yang berlebihan */
+    .container {
+        margin: 0;
+        padding: 1rem;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+    }
+
+    /* Hindari pemotongan antar halaman */
+    .container,
+    .form-group,
+    table,
+    tr,
+    td,
+    th {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Atur tabel agar tetap utuh */
+    table {
+        page-break-after: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+
+    td::before {
+        display: none !important; /* Hindari tampilan mobile label saat print */
+    }
+
+    .navbar {
+        background: white !important;
+        color: black !important;
+        box-shadow: none;
+    }
+
+    .nav-links a {
+        color: black !important;
+        background: none !important;
+        text-decoration: none;
+    }
+
+    /* Perbesar hasil persentase agar lebih jelas di print */
+    #hasil-persentase {
+        font-size: 2.2rem;
+    }
+
+    #hasil-rekomendasi {
+        font-size: 1.3rem;
+    }
+}
