@@ -103,7 +103,7 @@ table {
 th, td {
     border: 1px solid var(--gray-border);
     padding: 0.8rem;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
 }
 
