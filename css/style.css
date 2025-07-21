@@ -115,7 +115,7 @@ thead th {
 #perlengkapan-instalasi th {
     background-color: transparent;
     font-weight: 500;
-    width: 40%;
+    width: 100%;
 }
 
 /* ==== Result Section ==== */
@@ -247,7 +247,7 @@ thead th {
     #perlengkapan-instalasi th,
     #perlengkapan-instalasi td {
         display: block;
-        width: 100%;
+        width: 40%;
         text-align: left;
         padding: 0.8rem;
     }
