@@ -90,7 +90,7 @@ select {
     border-radius: 4px;
     box-sizing: border-box; /* Sangat penting untuk konsistensi ukuran */
     font-family: 'Poppins';
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 
 /* ==== Gaya Tabel (Tampilan Desktop) ==== */
