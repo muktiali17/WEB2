@@ -90,9 +90,21 @@ select {
     border-radius: 4px;
     box-sizing: border-box; /* Sangat penting untuk konsistensi ukuran */
     font-family: 'Poppins';
-    text-transform: uppercase;
+    text-transform: none;
 }
-
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--gray-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    resize: vertical; /* Bisa resize ke bawah */
+    white-space: pre-wrap; /* Agar Enter tetap terlihat */
+    overflow-wrap: break-word; /* Agar kata panjang turun ke bawah */
+}
 /* ==== Gaya Tabel (Tampilan Desktop) ==== */
 table {
     width: 100%;

@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     calculateVisualScore();
 });
-
+document.querySelectorAll('textarea').forEach(function(textarea) {
+    textarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+});
 // import { jsPDF } from 'jspdf';
 // import 'jspdf-autotable';
 
