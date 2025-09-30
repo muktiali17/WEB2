@@ -285,4 +285,26 @@ thead th {
     #perlengkapan-instalasi td::before {
         display: none; 
     }
+    
+@media print {
+    @page {
+        size: A4 landscape;       /* POSISI LANDSCAPE */
+        margin: 10mm;             /* Sesuaikan margin cetak */
+    }
+
+    body {
+        -webkit-print-color-adjust: exact; /* agar warna tetap terlihat */
+    }
+
+    .navbar,
+    .download-button {
+        display: none !important;  /* Hilangkan navbar & tombol saat dicetak */
+    }
+
+    table, th, td {
+        white-space: normal !important;
+        overflow-wrap: break-word;
+    }
+}
+
 }
