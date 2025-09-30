@@ -107,16 +107,22 @@ textarea {
 }
 /* ==== Gaya Tabel (Tampilan Desktop) ==== */
 table {
+    table-layout: auto !important;
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
+    /* border-collapse: collapse;
+    margin-bottom: 1.5rem; */
 }
 
 th, td {
-    border: 1px solid var(--gray-border);
+    white-space: normal !important;     /* Izinkan teks turun ke bawah */
+    word-wrap: break-word;              /* Pecah kata panjang */
+    overflow-wrap: break-word;
+    min-width: 80px;                     /* Opsional, supaya tidak terlalu sempit */
+    vertical-align: top; 
+    /* border: 1px solid var(--gray-border);
     padding: 0.8rem;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: middle; */
 }
 
 thead th {
