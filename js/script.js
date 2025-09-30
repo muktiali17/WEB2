@@ -46,6 +46,9 @@ document.querySelectorAll('textarea').forEach(function(textarea) {
         this.style.height = (this.scrollHeight) + 'px';
     });
 });
+document.getElementById('download-button').addEventListener('click', function () {
+    window.print();    // memanggil dialog print browser
+});
 // import { jsPDF } from 'jspdf';
 // import 'jspdf-autotable';
 
